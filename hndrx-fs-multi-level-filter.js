@@ -18,7 +18,7 @@ function onChangeLevel1(e) {
   e.preventDefault();
   var selectedLevel1Value = level1SelectField.value;
 
-  // Reset the District AND Suburb Select Fields
+  // Reset the Level 2 AND Level 3 Select Fields
   // select back to default
   reset('[hndrx-reset-button="level2"]');
   reset('[hndrx-reset-button="level3"]');
@@ -26,7 +26,7 @@ function onChangeLevel1(e) {
   const level2SelectFieldLength = level2SelectField.options.length;
   const level3SelectFieldLength = level3SelectField.options.length;
 
-  // Take each option from district AND suburb select and remove it, so that theres an empty list
+  // Take each option from level 2 AND level 3 select and remove it, so that theres an empty list
   for (t = level2SelectFieldLength; t >= 2; t--) {
     document.querySelector('[hndrx-select-field="level2"] :nth-child(' + t + ")").remove();
   }
@@ -35,7 +35,7 @@ function onChangeLevel1(e) {
     document.querySelector('[hndrx-select-field="level3"] :nth-child(' + y + ")").remove();
   }
 
-  // insert each item from district-text-block and suburb-text-block back in
+  // insert each item from [hndrx-select-field="level2"] and [hndrx-select-field="level3"] back in
   for (i = 0; i < level2CollectionList.childElementCount; i++) {
     $('[hndrx-select-field="level2"]').append(
       `<option value="${
@@ -64,9 +64,9 @@ function onChangeLevel1(e) {
     );
   }
 
-  // Loop through all classes of .region-district-text-block and compare with selectedRegionValue
+  // Loop through all classes of [hndrx-select-element="level2of1"] and compare with selectedLevel1Value
   for (i = 0; i < level2CollectionList.childElementCount; i++) {
-    // If equals false, read out text of sibling class .district-text-block
+    // If equals false, read out text of sibling class [hndrx-select-field="level2"]
     if (
       selectedLevel1Value !=
       level2CollectionList.querySelectorAll(
@@ -89,7 +89,7 @@ function onChangeLevel1(e) {
     }
   }
 
-  // Disable select fields; disable district select field, if "Select Region..." was selected (no real value)
+  // Disable select fields; disable level 2 select field, if "Select Level 1..." was selected (no real value)
   if (level1SelectField.value) {
     level2SelectField.disabled = false;
   } else {
@@ -102,20 +102,19 @@ function onChangeLevel2(e) {
   e.preventDefault();
   var selectedLevel2Value = level2SelectField.value;
 
-  // Reset the District Select Field
+  // Reset the Level 2 Select Field
   // select back to default
   reset('[hndrx-reset-button="level3"]');
 
   const level3SelectFieldLength = level3SelectField.options.length;
 
-  // Take each option from suburb select and remove it, so that theres an empty list
+  // Take each option from level 3 select and remove it, so that theres an empty list
   for (s = level3SelectFieldLength; s >= 2; s--) {
     document.querySelector('[hndrx-select-field="level3"] :nth-child(' + s + ")").remove();
   }
 
-  // insert each item from suburb-text-block back in
+  // insert each item from [hndrx-select-field="level3"] back in
   for (u = 0; u < level3CollectionList.childElementCount; u++) {
-    // var districtTextBlock = districtCollectionList.getElementsByClassName("district-text-block")[i];
     $('[hndrx-select-field="level3"]').append(
       `<option value="${
         level3CollectionList.querySelectorAll(
@@ -129,9 +128,9 @@ function onChangeLevel2(e) {
     );
   }
 
-  // Loop through all classes of .suburb-district-text-block and compare with selectedDistrictValue
+  // Loop through all classes of [hndrx-select-element="level3of2"] and compare with selectedLevel2Value
   for (i = 0; i < level3CollectionList.childElementCount; i++) {
-    // If equals false, read out text of sibling class .suburb-text-block
+    // If equals false, read out text of sibling class [hndrx-select-field="level3"]
     if (
       selectedLevel2Value !=
       level3CollectionList.querySelectorAll(
@@ -154,7 +153,7 @@ function onChangeLevel2(e) {
     }
   }
 
-  // Disable suburb select field; disable suburb select field, if "Select District..." was selected (no real value)
+  // Disable level 3 select field; disable level 3 select field, if "Select Level 2..." was selected (no real value)
   if (level2SelectField.value) {
     level3SelectField.disabled = false;
   } else {
@@ -163,6 +162,5 @@ function onChangeLevel2(e) {
 }
 
 function reset(linkAttribute) {
-  // document.getElementById(buttonId).click();
   document.querySelector(linkAttribute).click();
 }
